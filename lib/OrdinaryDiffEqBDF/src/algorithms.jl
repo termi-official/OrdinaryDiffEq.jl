@@ -291,7 +291,7 @@ SBDF4(; kwargs...) = SBDF(4; kwargs...)
     step_limiter! = trivial_limiter!,
     """
 )
-struct QNDF1{AD, F, F2, κType, StepLimiter, CJ} <:
+struct QNDF1{AD, F, F2, κType, StepLimiter, CJ, QT} <:
     OrdinaryDiffEqNewtonAdaptiveAlgorithm
     linsolve::F
     nlsolve::F2
@@ -301,6 +301,7 @@ struct QNDF1{AD, F, F2, κType, StepLimiter, CJ} <:
     step_limiter!::StepLimiter
     autodiff::AD
     concrete_jac::CJ
+    qmax::QT
 end
 
 function QNDF1(;
