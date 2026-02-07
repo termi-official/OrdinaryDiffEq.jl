@@ -799,6 +799,13 @@ function setup_controller_cache(alg::CompositeAlgorithm, caches::CompositeCache,
     )
 end
 
+function setup_controller_cache(alg::CompositeAlgorithm, atmp::AbstractVector{T}, cc::DummyController) where T
+    return CompositeControllerCache(
+        map(alg -> setup_controller_cache(alg, atmp, default_controller(T, alg)), alg.algs),
+        atmp,
+    )
+end
+
 @inline function accept_step_controller(integrator, cache::CompositeControllerCache, alg::CompositeAlgorithm)
     current_idx = integrator.cache.current
     return accept_step_controller(integrator, @inbounds(cache.caches[current_idx]), @inbounds(alg.algs[current_idx]))

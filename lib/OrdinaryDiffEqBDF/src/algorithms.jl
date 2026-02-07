@@ -535,7 +535,8 @@ Utilizes Shampine's accuracy-optimal kappa values as defaults (has a keyword arg
     stald_tiny = 1e-90,
     """
 )
-struct FBDF{MO, AD, F, F2, K, T, StepLimiter, CJ, QT} <:
+
+struct FBDF{MO, CS, AD, F, F2, CJ, K, T, StepLimiter, QT} <:
     OrdinaryDiffEqNewtonAdaptiveAlgorithm
     max_order::Val{MO}
     linsolve::F
@@ -576,7 +577,7 @@ function FBDF(;
     autodiff = _fixup_ad(autodiff)
 
     return FBDF(
-        max_order, linsolve, nlsolve, κ, tol, extrapolant,
+        MO, linsolve, nlsolve, κ, tol, extrapolant,
         step_limiter!, autodiff,
         stald, Float64(stald_rrcut), Float64(stald_vrrtol), Float64(stald_vrrt2),
         Float64(stald_sqtol), Float64(stald_rrtol), Float64(stald_tiny),
@@ -779,6 +780,7 @@ DBDF(;chunk_size=Val{0}(),autodiff=Val{true}(), concrete_jac = nothing,diff_type
     max_order::Val{MO} = Val{5}(),
     """
 )
+
 struct DFBDF{MO, AD, F, F2, K, T, CJ, QT} <: DAEAlgorithm
     max_order::Val{MO}
     linsolve::F
@@ -803,7 +805,7 @@ function DFBDF(;
     autodiff = _fixup_ad(autodiff)
 
     return DFBDF(
-        max_order, linsolve, nlsolve, κ, tol, extrapolant,
+        MO, linsolve, nlsolve, κ, tol, extrapolant,
         autodiff,
         _unwrap_val(concrete_jac),
         qmax, qsteady_min, qsteady_max,
