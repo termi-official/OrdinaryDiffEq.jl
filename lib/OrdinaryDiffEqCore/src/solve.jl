@@ -524,7 +524,6 @@ function _ode_init(
     opts = DEOptions{
         typeof(abstol_internal), typeof(reltol_internal),
         QT, tType,
-        typeof(controller_cache),
         typeof(internalnorm), typeof(internalopnorm),
         typeof(save_end_user),
         typeof(callbacks_internal),
