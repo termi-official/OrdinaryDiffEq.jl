@@ -184,7 +184,7 @@ function IController(alg; kwargs...)
     return IController(Float64, alg; kwargs...)
 end
 
-function IController(QT, alg; qmin = nothing, qmax = nothing, qmax_first_step = nothing, gamma = nothing, qsteady_min = nothing, qsteady_max = nothing)
+function IController(QT, alg::Union{OrdinaryDiffEqAlgorithm, DAEAlgorithm}; qmin = nothing, qmax = nothing, qmax_first_step = nothing, gamma = nothing, qsteady_min = nothing, qsteady_max = nothing)
     return IController{QT}(
         qmin === nothing ? qmin_default(alg) : qmin,
         qmax === nothing ? qmax_default(alg) : qmax,
@@ -318,7 +318,7 @@ function PIController(alg; kwargs...)
     return PIController(Float64, alg; kwargs...)
 end
 
-function PIController(QT, alg; beta1 = nothing, beta2 = nothing, qmin = nothing, qmax = nothing, qmax_first_step = nothing, gamma = nothing, qsteady_min = nothing, qsteady_max = nothing, qoldinit = nothing)
+function PIController(QT, alg::Union{OrdinaryDiffEqAlgorithm, DAEAlgorithm}; beta1 = nothing, beta2 = nothing, qmin = nothing, qmax = nothing, qmax_first_step = nothing, gamma = nothing, qsteady_min = nothing, qsteady_max = nothing, qoldinit = nothing)
     beta2 = beta2 === nothing ? beta2_default(alg) : beta2
     beta1 = beta1 === nothing ? beta1_default(alg, beta2) : beta1
     qoldinit = qoldinit === nothing ? 1 // 10^4 : qoldinit
@@ -491,7 +491,7 @@ function PIDController(alg; kwargs...)
     return PIDController(Float64, alg; kwargs...)
 end
 
-function PIDController(QT, alg; beta = nothing, accept_safety = 0.81, limiter = default_dt_factor_limiter, qsteady_min = nothing, qsteady_max = nothing)
+function PIDController(QT, alg::Union{OrdinaryDiffEqAlgorithm, DAEAlgorithm}; beta = nothing, accept_safety = 0.81, limiter = default_dt_factor_limiter, qsteady_min = nothing, qsteady_max = nothing)
     if beta === nothing
         beta2 = QT(beta2_default(alg))
         beta1 = QT(beta1_default(alg, beta2))
@@ -734,7 +734,7 @@ function setup_controller_cache(alg, cache, controller::PredictiveController{T})
 end
 
 @inline function stepsize_controller!(integrator, cache::PredictiveControllerCache, alg)
-    (; qmin, qmax, gamma) = cache.controller
+    (; qmin, qmax, gamma) = cache
     qmax = get_current_qmax(integrator, qmax)
     EEst = DiffEqBase.value(integrator.EEst)
     if iszero(EEst)
