@@ -48,7 +48,6 @@ stepsize_predictor!(integrator, alg, n_new) = stepsize_predictor!(integrator, in
         integrator,
         cache::ExtrapolationControllerCache,
         alg::Union{
-            AitkenNeville,
             ExtrapolationMidpointDeuflhard,
             ExtrapolationMidpointHairerWanner,
             ImplicitDeuflhardExtrapolation,
