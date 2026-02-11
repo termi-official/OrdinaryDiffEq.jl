@@ -487,13 +487,6 @@ function _ode_init(
         )
     end
 
-    # Deprecation warnings for users to break down which parameters they accidentally set.
-    if (controller !== nothing)
-        message = "Providing the legacy input `controller` is deprecated. Please pass the controller via the algorithm."
-        Base.depwarn(message, :init)
-        Base.depwarn(message, :solve)
-    end
-
     QT = determine_controller_datatype(u, internalnorm, tspan)
 
     if controller === nothing
