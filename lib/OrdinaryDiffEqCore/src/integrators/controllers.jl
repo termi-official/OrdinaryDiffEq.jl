@@ -246,7 +246,6 @@ function sync_controllers!(cache1::IControllerCache, cache2::IControllerCache)
 end
 
 function sync_controllers!(cache1::IControllerCache, cache2::IControllerCache)
-    cache1.q = cache2.q
     cache1.dtreject = cache2.dtreject
     return nothing
 end
