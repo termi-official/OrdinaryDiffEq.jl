@@ -1,4 +1,4 @@
-using OrdinaryDiffEq, ODEProblemLibrary
+using OrdinaryDiffEq, ODEProblemLibrary, ADTypes
 using Test
 using OrdinaryDiffEqLowOrderRK, OrdinaryDiffEqRosenbrock, OrdinaryDiffEqSDIRK
 
@@ -6,17 +6,19 @@ using OrdinaryDiffEqLowOrderRK, OrdinaryDiffEqRosenbrock, OrdinaryDiffEqSDIRK
     prob = ODEProblemLibrary.prob_ode_linear
     prob2D = ODEProblemLibrary.prob_ode_2Dlinear
 
-    inferred = [BS3(), Tsit5(), RK4(), Vern6()]
-    for alg in inferred
+    inferred1 = [BS3(), Tsit5(), RK4(), Vern6()]
+    for alg in inferred1
         @inferred init(prob, alg)
         @inferred init(prob2D, alg)
     end
 
-    #notinferred = [SDIRK2(), TRBDF2(), KenCarp4(), Rosenbrock23(), Rodas4()]
-    #for alg in notinferred
-    #    @test_broken @inferred init(prob, alg)
-    #    @test_broken @inferred init(prob2D, alg)
-    #end
+    # ForwardDiff is not fully inferable
+    autodiff = ADTypes.AutoFiniteDiff()
+    inferred2 = [SDIRK2(;autodiff), TRBDF2(;autodiff), KenCarp4(;autodiff), Rosenbrock23(;autodiff), Rodas4(;autodiff)]
+    for alg in inferred2
+        @inferred init(prob, alg)
+        @inferred init(prob2D, alg)
+    end
 end
 
 # Regression test for https://github.com/SciML/OrdinaryDiffEq.jl/issues/3200
