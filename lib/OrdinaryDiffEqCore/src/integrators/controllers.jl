@@ -805,19 +805,6 @@ function setup_controller_cache(alg::CompositeAlgorithm, caches::CompositeCache,
     )
 end
 
-function setup_controller_cache(alg::CompositeAlgorithm, caches::DefaultCache, cc::CompositeController)
-    return CompositeControllerCache(
-        (
-            setup_controller_cache(alg.algs[1], caches.cache1, controller.controllers[1]),
-            setup_controller_cache(alg.algs[2], caches.cache2, controller.controllers[2]),
-            setup_controller_cache(alg.algs[3], caches.cache3, controller.controllers[3]),
-            setup_controller_cache(alg.algs[4], caches.cache4, controller.controllers[4]),
-            setup_controller_cache(alg.algs[5], caches.cache5, controller.controllers[5]),
-            setup_controller_cache(alg.algs[6], caches.cache6, controller.controllers[6]),
-        )
-    )
-end
-
 @inline function accept_step_controller(integrator, cache::CompositeControllerCache, alg::CompositeAlgorithm)
     current_idx = integrator.cache.current
     return accept_step_controller(integrator, @inbounds(cache.caches[current_idx]), @inbounds(alg.algs[current_idx]))
