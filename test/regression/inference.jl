@@ -46,11 +46,13 @@ using OrdinaryDiffEqLowOrderRK, OrdinaryDiffEqRosenbrock, OrdinaryDiffEqSDIRK
         end
     end
 
-    #notinferred = [SDIRK2(), TRBDF2(), KenCarp4(), Rosenbrock23(), Rodas4()]
-    #for alg in notinferred
-    #    @test_broken @inferred init(prob, alg)
-    #    @test_broken @inferred init(prob2D, alg)
-    #end
+    # ForwardDiff is not fully inferable
+    autodiff = ADTypes.AutoFiniteDiff()
+    inferred2 = [SDIRK2(;autodiff), TRBDF2(;autodiff), KenCarp4(;autodiff), Rosenbrock23(;autodiff), Rodas4(;autodiff)]
+    for alg in inferred2
+        @inferred init(prob, alg)
+        @inferred init(prob2D, alg)
+    end
 end
 
 # Regression test for https://github.com/SciML/OrdinaryDiffEq.jl/issues/3200
