@@ -469,7 +469,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         # Make sure a stepsize scaling factor of order (alg.min_order + 1) is provided for the step_*_controller!
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) ||
@@ -707,7 +707,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         # Make sure a stepsize scaling factor of order (alg.min_order + 1) is provided for the step_*_controller!
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) ||
@@ -940,7 +940,7 @@ function perform_step!(
 
         # Check if an approximation of some order in the order window can be accepted
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif integrator.EEst <=
@@ -1158,7 +1158,7 @@ function perform_step!(
 
         # Check if an approximation of some order in the order window can be accepted
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif integrator.EEst <=
@@ -1614,7 +1614,7 @@ function perform_step!(
         while n_curr <= win_max
             tol = integrator.opts.internalnorm(cache.utilde - integrator.u, t) /
                 integrator.EEst # Used by the convergence monitor
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif integrator.EEst <=
@@ -1940,7 +1940,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         while n_curr <= win_max
             tol = integrator.opts.internalnorm(utilde - u, t) / integrator.EEst # Used by the convergence monitor
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif integrator.EEst <=
@@ -2203,7 +2203,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         # Make sure a stepsize scaling factor of order (alg.min_order + 1) is provided for the step_*_controller!
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) ||
@@ -2425,7 +2425,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         # Make sure a stepsize scaling factor of order (alg.min_order + 1) is provided for the step_*_controller!
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) ||
@@ -2763,7 +2763,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         # Make sure a stepsize scaling factor of order (alg.min_order + 1) is provided for the step_*_controller!
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) ||
@@ -3233,7 +3233,7 @@ function perform_step!(
                 EEst1 *= subdividing_sequence[i] / subdividing_sequence[1]
             end
             EEst1 *= EEst1
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) || integrator.EEst <= EEst1
@@ -3581,7 +3581,7 @@ function perform_step!(
         # Check if an approximation of some order in the order window can be accepted
         # Make sure a stepsize scaling factor of order (alg.min_order + 1) is provided for the step_*_controller!
         while n_curr <= win_max
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) ||
@@ -4071,7 +4071,7 @@ function perform_step!(
             EEst1 *= EEst1
 
             #@show integrator.opts.internalnorm(integrator.u - cache.utilde,t)
-            if accept_step_controller(integrator, integrator.controller_cache)
+            if accept_step_controller(integrator, integrator.controller_cache, integrator.alg)
                 # Accept current approximation u of order n_curr
                 break
             elseif (n_curr < alg.min_order + 1) || integrator.EEst <= EEst1
