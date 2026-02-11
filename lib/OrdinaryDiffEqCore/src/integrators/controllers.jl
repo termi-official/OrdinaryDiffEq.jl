@@ -805,10 +805,16 @@ function setup_controller_cache(alg::CompositeAlgorithm, caches::CompositeCache,
     )
 end
 
-function setup_controller_cache(alg::CompositeAlgorithm, atmp::AbstractVector{T}, cc::DummyController) where {T}
+function setup_controller_cache(alg::CompositeAlgorithm, caches::DefaultCache, cc::CompositeController)
     return CompositeControllerCache(
-        map(alg -> setup_controller_cache(alg, atmp, default_controller(T, alg)), alg.algs),
-        atmp,
+        (
+            setup_controller_cache(alg.algs[1], caches.cache1, controller.controllers[1]),
+            setup_controller_cache(alg.algs[2], caches.cache2, controller.controllers[2]),
+            setup_controller_cache(alg.algs[3], caches.cache3, controller.controllers[3]),
+            setup_controller_cache(alg.algs[4], caches.cache4, controller.controllers[4]),
+            setup_controller_cache(alg.algs[5], caches.cache5, controller.controllers[5]),
+            setup_controller_cache(alg.algs[6], caches.cache6, controller.controllers[6]),
+        )
     )
 end
 
