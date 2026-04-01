@@ -618,7 +618,7 @@ function _ode_init(
         )
     dtchangeable = isdtchangeable(_alg)
     success_iter = 0
-    reinitiailize = true
+    reinitialize = true
     saveiter = 0 # Starts at 0 so first save is at 1
     saveiter_dense = 0
     fsalfirst, fsallast = _cache !== nothing ? (nothing, nothing) :
