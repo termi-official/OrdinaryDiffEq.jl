@@ -48,13 +48,6 @@ function isdefaultalg(
 end
 
 SciMLBase.supports_solve_rng(::SciMLBase.AbstractODEProblem, ::Nothing) = true
-function OrdinaryDiffEqCore.default_controller(
-        QT, alg::CompositeAlgorithm{
-            <:Any, <:Tuple{Tsit5, Vern7, Rosenbrock23, Rodas5P, FBDF, FBDF},
-        }
-    )
-    return PIController(float(DEFAULTBETA1S[1]), float(DEFAULTBETA2S[1]))
-end
 
 function SciMLBase.__init(prob::ODEProblem, ::Nothing, args...; kwargs...)
     return SciMLBase.__init(
