@@ -10,8 +10,8 @@ function stepsize_controller!(integrator, alg::TauLeaping)
 end
 
 function step_accept_controller!(integrator, alg::TauLeaping)
-    integrator.q = min(integrator.alg.gamma / integrator.EEst, integrator.alg.qmax)
-    return integrator.dt * integrator.q
+    q = min(integrator.alg.gamma / integrator.EEst, integrator.alg.qmax)
+    return integrator.dt * q
 end
 
 function step_reject_controller!(integrator, alg::TauLeaping)

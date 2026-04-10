@@ -657,7 +657,7 @@ function _ode_init(
         opts, stats, initializealg, differential_vars,
         fsalfirst, fsallast, _rng,
         W, P, sqdt,
-        noise, c, rate_constants, QT(1)
+        noise, c, rate_constants
     )
 
     if initialize_integrator

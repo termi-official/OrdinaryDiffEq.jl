@@ -629,7 +629,7 @@ qtmp = (integrator.EEst^expo) / fac
 if q <= integrator.opts.qsteady_max && q >= integrator.opts.qsteady_min
     q = one(q)
 end
-integrator.qold = q
+integrator.controller_cache.qold = q
 q
 ```
 
@@ -659,7 +659,7 @@ When it rejects, it's the same as the [`IController`](@ref):
 if integrator.success_iter == 0
     integrator.dt *= 0.1
 else
-    integrator.dt = integrator.dt / integrator.qold
+    integrator.dt = integrator.dt / integrator.controller_cache.qold
 end
 ```
 """
