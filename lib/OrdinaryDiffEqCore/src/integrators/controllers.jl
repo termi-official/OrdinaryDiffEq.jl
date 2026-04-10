@@ -245,11 +245,6 @@ function sync_controllers!(cache1::IControllerCache, cache2::IControllerCache)
     return nothing
 end
 
-function sync_controllers!(cache1::IControllerCache, cache2::IControllerCache)
-    cache1.dtreject = cache2.dtreject
-    return nothing
-end
-
 # PI step size controller
 """
     PIController(beta1, beta2)
@@ -457,20 +452,20 @@ Some standard controller parameters suggested in the literature are
     [DOI: 10.1145/641876.641877](https://doi.org/10.1145/641876.641877)
   - Söderlind, Wang (2006)
     Adaptive time-stepping and computational stability
-    [DOI: 10.1016/j.cam.2005.03.008](https://doi.org/10.1016/j.cam.2005.03.008) # controller coefficients
-  - Ranocha, Dalcin, Parsani, Ketcheson (2021) # history of the error estimates
-    Optimized Runge-Kutta Methods with Automatic Step Size Control for   # accept a step if the predicted change of the step size
-    Compressible Computational Fluid Dynamics    # is bigger than this parameter
+    [DOI: 10.1016/j.cam.2005.03.008](https://doi.org/10.1016/j.cam.2005.03.008)
+  - Ranocha, Dalcin, Parsani, Ketcheson (2021)
+    Optimized Runge-Kutta Methods with Automatic Step Size Control for
+    Compressible Computational Fluid Dynamics
     [arXiv:2104.06836](https://arxiv.org/abs/2104.06836)    # limiter of the dt factor (before clipping)
 """
-struct PIDController{QT, Limiter} <: AbstractLegacyController
+struct PIDController{QT, Limiter} <: AbstractController
     beta::NTuple{3, QT} # controller coefficients
     err::MVector{3, QT} # history of the error estimates (mutable via indexing)
     accept_safety::QT   # accept a step if the predicted change of the step size
     # is bigger than this parameter
     limiter::Limiter    # limiter of the dt factor (before clipping)
-    qsteady_min::T
-    qsteady_max::T
+    qsteady_min::QT
+    qsteady_max::QT
 end
 
 @inline default_dt_factor_limiter(x) = one(x) + atan(x - one(x))
