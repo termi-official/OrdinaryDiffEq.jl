@@ -27,6 +27,7 @@ OrdinaryDiffEqLinear = {path = "../../lib/OrdinaryDiffEqLinear"}
 OrdinaryDiffEqLowOrderRK = {path = "../../lib/OrdinaryDiffEqLowOrderRK"}
 OrdinaryDiffEqRosenbrock = {path = "../../lib/OrdinaryDiffEqRosenbrock"}
 OrdinaryDiffEqSDIRK = {path = "../../lib/OrdinaryDiffEqSDIRK"}
+OrdinaryDiffEqNonlinearSolve = {path = "../../lib/OrdinaryDiffEqNonlinearSolve"}
 OrdinaryDiffEqTsit5 = {path = "../../lib/OrdinaryDiffEqTsit5"}
 DiffEqBase = {path = "../../lib/DiffEqBase"}
 
