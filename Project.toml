@@ -17,6 +17,7 @@ OrdinaryDiffEqVerner = "79d7bb75-1356-48c1-b8c0-6832512096c2"
 SciMLBase = "0bca4576-84f4-4d90-8ffe-ffa030f20462"
 
 [sources]
+OrdinaryDiffEqAdamsBashforthMoulton = {path = "lib/OrdinaryDiffEqAdamsBashforthMoulton"}
 OrdinaryDiffEqBDF = {path = "lib/OrdinaryDiffEqBDF"}
 OrdinaryDiffEqCore = {path = "lib/OrdinaryDiffEqCore"}
 OrdinaryDiffEqDefault = {path = "lib/OrdinaryDiffEqDefault"}
@@ -124,8 +125,7 @@ Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 StructArrays = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
 Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-SafeTestsets = "1bc83da4-3b8d-516f-aca4-4fe02f6d838f"
-Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [targets]
 test = ["ADTypes", "ArrayInterface", "ComponentArrays", "AlgebraicMultigrid", "DiffEqBase", "DiffEqCallbacks", "DifferentiationInterface", "DiffEqDevTools", "ExplicitImports",  "ForwardDiff", "IncompleteLU", "InteractiveUtils", "LinearAlgebra", "LinearSolve", "ODEProblemLibrary", "OrdinaryDiffEqAdamsBashforthMoulton", "OrdinaryDiffEqDifferentiation", "OrdinaryDiffEqExplicitRK", "OrdinaryDiffEqExplicitTableaus", "OrdinaryDiffEqExponentialRK", "OrdinaryDiffEqExtrapolation", "OrdinaryDiffEqFIRK", "OrdinaryDiffEqFeagin", "OrdinaryDiffEqFunctionMap", "OrdinaryDiffEqHighOrderRK", "OrdinaryDiffEqIMEXMultistep", "OrdinaryDiffEqLinear", "OrdinaryDiffEqLowOrderRK", "OrdinaryDiffEqLowStorageRK", "NonlinearSolve", "OrdinaryDiffEqNonlinearSolve", "OrdinaryDiffEqNordsieck", "OrdinaryDiffEqPDIRK", "OrdinaryDiffEqPRK", "OrdinaryDiffEqQPRK", "OrdinaryDiffEqRKN", "OrdinaryDiffEqSDIRK", "OrdinaryDiffEqSSPRK", "OrdinaryDiffEqStabilizedIRK", "OrdinaryDiffEqStabilizedRK", "OrdinaryDiffEqSymplecticRK", "ElasticArrays", "JLArrays", "Random", "SafeTestsets", "StableRNGs", "StructArrays", "Test", "Unitful", "Pkg", "RecursiveArrayTools", "RecursiveFactorization", "SparseArrays", "SparseConnectivityTracer", "SparseMatrixColorings", "StaticArrays", "Statistics"]
