@@ -576,7 +576,7 @@ function FBDF(;
     autodiff = _fixup_ad(autodiff)
 
     return FBDF(
-        MO, linsolve, nlsolve, κ, tol, extrapolant,
+        max_order, linsolve, nlsolve, κ, tol, extrapolant,
         step_limiter!, autodiff,
         stald, Float64(stald_rrcut), Float64(stald_vrrtol), Float64(stald_vrrt2),
         Float64(stald_sqtol), Float64(stald_rrtol), Float64(stald_tiny),
@@ -803,7 +803,7 @@ function DFBDF(;
     autodiff = _fixup_ad(autodiff)
 
     return DFBDF(
-        MO, linsolve, nlsolve, κ, tol, extrapolant,
+        max_order, linsolve, nlsolve, κ, tol, extrapolant,
         autodiff,
         _unwrap_val(concrete_jac),
         qmax, qsteady_min, qsteady_max,
