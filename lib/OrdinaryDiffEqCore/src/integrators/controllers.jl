@@ -460,7 +460,6 @@ Some standard controller parameters suggested in the literature are
 """
 struct PIDController{QT, Limiter} <: AbstractController
     beta::NTuple{3, QT} # controller coefficients
-    err::MVector{3, QT} # history of the error estimates (mutable via indexing)
     accept_safety::QT   # accept a step if the predicted change of the step size
     # is bigger than this parameter
     limiter::Limiter    # limiter of the dt factor (before clipping)
@@ -501,10 +500,6 @@ function PIDController(QT, alg; beta = nothing, accept_safety = 0.81, limiter = 
         QT(qsteady_min === nothing ? qsteady_min_default(alg) : qsteady_min),
         QT(qsteady_max === nothing ? qsteady_max_default(alg) : qsteady_max),
     )
-    beta = map(float, promote(beta1, beta2, beta3))
-    QT = eltype(beta)
-    err = MVector{3, QT}(true, true, true)
-    return PIDController(beta, err, convert(QT, accept_safety), limiter)
 end
 
 function Base.show(io::IO, controller::PIDController)
